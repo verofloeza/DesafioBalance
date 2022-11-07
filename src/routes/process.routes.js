@@ -1,4 +1,3 @@
-import cluster from "cluster";
 import express from "express";
 import minimist from "minimist";
 import os from 'os';
@@ -16,14 +15,24 @@ routerProcess.get( "/",  (req, res) => {
     Path de ejecución: ${process.execPath} <br>
     Process id: ${process.pid} <br>
     Carpeta del proyecto: ${process.cwd()}<br>
-    Procesadores: ${os.cpus.length}
+    Procesadores: ${os.cpus().length}
     `)
 })
 
 export default routerProcess;
 
+/*********** PM2 ***********/
+
 // npm i -g pm2
 // pm2 list
-// pm2 start server.js --name="Server 1" --watch -- PORT
-// pm2 start server.js --name="Server 2" --watch -i max  -- 8081
+// pm2 start server.js --name="Server 1" --watch -- PORT   (modo FORK)
+// pm2 start server.js --name="Server 2" --watch -i max  -- 8081  (modo CLUSTER)
 // pm2 list
+// pm2 delete 0 1 2 3 4
+
+/*********** FOREVER ***********/
+
+// forever start server.js 8080
+// forever start server.js 8081
+// forever list
+// forever stopall (finalizacion de todos los procesos)
